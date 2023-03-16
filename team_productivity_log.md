@@ -1,6 +1,7 @@
+Each time a team member completes a task in the project they need to create an issue on GitHub and add that link to this document. Tasks can be the following categories: Feature, Bug, Docs, or Devops Task
 
 
-| Column 1 | Column 2 | Column 3 | Column 4 | Column 5 | Column 6 | Column 7 | Column 8 | Column 9 |
+| Issue Title | Story Points | Issue Link | Status | Assigned To | Assigned On | Completed On | Category | Status Notes |
 | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- | -------- |
 | Row 1, Column 1 | Row 1, Column 2 | Row 1, Column 3 | Row 1, Column 4 | Row 1, Column 5 | Row 1, Column 6 | Row 1, Column 7 | Row 1, Column 8 | Row 1, Column 9 |
 | Row 2, Column 1 | Row 2, Column 2 | Row 2, Column 3 | Row 2, Column 4 | Row 2, Column 5 | Row 2, Column 6 | Row 2, Column 7 | Row 2, Column 8 | Row 2, Column 9 |
