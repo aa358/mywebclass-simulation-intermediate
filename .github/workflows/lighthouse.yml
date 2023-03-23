@@ -22,7 +22,8 @@ jobs:
           npm install -g artillery
           npm install -g artillery-plugin-playwright
           npm install -g lighthouse
-          npm install
+          npm install --package-lock-only
+          npm ci
           npm run build
 
       - name: Run Lighthouse tests
