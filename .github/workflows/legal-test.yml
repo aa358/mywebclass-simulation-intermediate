@@ -1,0 +1,29 @@
+name: AAA Compliance Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install axe-core
+
+    - name: Run axe-core tests
+      run: |
+        npx playwright install-deps
+        npx playwright test --grep "axe-core-tests"
+
+    - name: Upload results
+      uses: actions/upload-artifact@v2
+      with:
+        name: axe-core-results
+        path: results/
