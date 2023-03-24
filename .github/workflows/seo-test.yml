@@ -1,0 +1,26 @@
+name: SEO Test
+
+on: [push]
+
+jobs:
+  seo:
+    name: SEO Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+    - name: Install dependencies
+      run: npm install
+    - name: Run Lighthouse SEO audit
+      run: npx playwright --no-headless --ignore-certificate-errors ./seo-test.js
+      env:
+        CI: true
+    - name: Archive Lighthouse report
+      uses: actions/upload-artifact@v2
+      with:
+        name: seo-report
+        path: lighthouse-report.html
