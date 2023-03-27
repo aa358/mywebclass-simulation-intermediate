@@ -1,9 +1,6 @@
 name: Test Website
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
   test:
@@ -44,4 +41,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: test-results
-          path: test-results/
+          path: w3c-report.html
