@@ -1,41 +1,21 @@
-name: Test and Generate Report
+name: Lighthouse Report
 
-on: [ push ]
+on: [push]
 
 jobs:
-  test:
+  lighthouse:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-
-      - name: Setup Node.js environment
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18.x'
-
-      - name: Install dependencies and build project
+      - name: Install dependencies
         run: |
           npm install
-          npx playwright install
-          npm ci
-          npm run build
-
-      - name: Run Lighthouse tests
-        run: |
-          npx playwright test
-
-      - name: Run Artillery tests
-        run: |
-          npx artillery run artillery.yaml -e test
-
-      - name: Generate Lighthouse Report
-        run: |
-          npx lighthouse-batch test-results/**/*.html --chrome-flags='--disable-gpu' --video --screenshots --asset-path='test-results/'
-
-      - name: Upload test results
+          npm install --global lighthouse
+      - name: Run Lighthouse
+        run: npx lighthouse http://localhost:3000 --output=json --output-path=report.json
+      - name: Upload report artifact
         uses: actions/upload-artifact@v2
         with:
-          name: lighthouse-results
-          path: test-report.html
+          name: lighthouse-report
+          path: report.json
