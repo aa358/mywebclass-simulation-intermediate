@@ -11,11 +11,11 @@ jobs:
       - name: Install dependencies
         run: |
           npm install
-          npm install --global lighthouse
+          npm install --global @lhci/cli
       - name: Run Lighthouse
-        run: npx lighthouse http://localhost:3000 --output=json --output-path=report.json
+        run: lhci autorun
       - name: Upload report artifact
         uses: actions/upload-artifact@v2
         with:
           name: lighthouse-report
-          path: report.json
+          path: "./.lighthouseci/created_at/*.html"
