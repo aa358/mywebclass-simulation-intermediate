@@ -15,7 +15,7 @@ jobs:
           npm install @playwright/test
 
       - name: Run accessibility test
-        run: npx playwright test --headed --grep accessibility
+        run: npx playwright test
 
       - name: Save Axe accessibility report
         uses: actions/upload-artifact@v2
