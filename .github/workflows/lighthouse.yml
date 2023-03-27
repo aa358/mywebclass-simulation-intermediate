@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Lighthouse tests
         run: |
-          npx playwright test --headed --timeout=30000 --output=test-results/ http://localhost:3000/ --grep='lighthouse'
+          npx playwright test
 
       - name: Run Artillery tests
         run: |
