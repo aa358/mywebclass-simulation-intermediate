@@ -18,6 +18,7 @@ jobs:
       - name: Install dependencies and build project
         run: |
           npm install
+          npx playwright install
           npm ci
           npm run build
 
