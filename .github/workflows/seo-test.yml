@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Run Lighthouse SEO audit
-      run: npx playwright --no-headless --ignore-certificate-errors ./seo-test.js
+      run: npx playwright ./seo-test.js
       env:
         CI: true
     - name: Archive Lighthouse report
