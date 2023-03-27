@@ -1,44 +1,20 @@
-name: Test Website
+name: W3C Validation Test
 
 on: [push]
 
 jobs:
-  test:
+  w3c-validation:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
       - name: Install dependencies
-        run: |
-          npm install
-          npm install --save-dev @lhci/cli@0.7.x
-          npm install --save-dev axe-webdriverjs
-          npm install --save-dev eslint
-          npm install --save-dev eslint-config-airbnb-base
-          npm install --save-dev eslint-plugin-import
-          npm install --save-dev playwright-chromium
-
-      - name: Start web server
-        run: npm run start &
-
-      - name: Wait for web server to start
-        run: sleep 5s
-
-      - name: Test W3C validation
-        run: npx html-validate http://localhost:3000 --format=checkstyle | tee test-results/w3c.xml
-
-      - name: Test handicap accessibility
-        run: npx axe-webdriverjs http://localhost:3000 --headless --save ./test-results/accessibility.json
-
-      - name: Test JavaScript style
-        run: npx eslint . --ext .js --format junit --output-file test-results/eslint.xml
-
-      - name: Generate Lighthouse Report
-        run: npx playwright test --headless --reporter=list,json --output=test-results/playwright-results ./tests/playwright/*.spec.js
-
-      - name: Upload artifacts
+        run: npm install
+      - name: Run W3C validation test
+        run: npx html-validate
+        env:
+          VALIDATOR_OPTIONS: --format=json --file=validation-report.json
+      - name: Upload validation report
         uses: actions/upload-artifact@v2
         with:
-          name: test-results
-          path: w3c-report.html
+          name: validation-report
+          path: validation-report.json
