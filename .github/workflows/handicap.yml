@@ -3,25 +3,22 @@ name: Accessibility Test
 on: [push]
 
 jobs:
-  accessibility:
+  test:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm install @axe-core/puppeteer
+          npm install @playwright/test
 
-      - name: Run accessibility audit
-        run: npm run axe
+      - name: Run accessibility test
+        run: npx playwright test --headed --grep accessibility
 
-      - name: Save Axe report as artifact
+      - name: Save Axe accessibility report
         uses: actions/upload-artifact@v2
         with:
           name: axe-report
-          path: axe-report.json
+          path: test-results/accessibility-results.json
