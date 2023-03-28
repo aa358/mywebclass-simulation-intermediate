@@ -1,0 +1,9 @@
+config:
+  target: "http://localhost:3000"
+
+scenarios:
+  - name: "Load test"
+    flow:
+      - get:
+          url: "/api/endpoint"
+          arrivalRate: 10

@@ -9,8 +9,9 @@
   "scripts": {
     "test": "npx standard && npx playwright test --config=playwright.config.js",
     "start": "webpack serve --open --config webpack.config.dev.js",
-    "build": "webpack  --config webpack.config.prod.js",
-    "grade": "python -m pytest -c pytest_grade.ini && npx playwright test --config=playwright_grade.config.js"
+    "build": "webpack  --config webpack.config.prod.js  --json > dist/stats.json",
+    "grade": "python -m pytest -c pytest_grade.ini && npx playwright test --config=playwright_grade.config.js",
+    "analyze": "webpack-bundle-analyzer dist/stats.json"
   },
   "standard": {
     "ignore": [
@@ -47,6 +48,7 @@
     "imagemin-mozjpeg": "^10.0.0",
     "imagemin-pngquant": "^9.0.2",
     "imagemin-webpack-plugin": "^2.4.2",
+    "jest": "^29.5.0",
     "mini-css-extract-plugin": "^2.7.2",
     "postcss-loader": "^7.0.2",
     "purgecss-webpack-plugin": "^5.0.0",
@@ -56,10 +58,12 @@
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^5.3.6",
     "webpack": "^5.75.0",
+    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.0.1",
     "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
-    "@popperjs/core": "^2.11.6"
+    "@popperjs/core": "^2.11.6",
+    "k6": "^0.0.0"
   }
 }
